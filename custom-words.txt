@@ -417,6 +417,7 @@ centralindia
 centralus
 centraluseuap
 certchain
+certificateprofiles
 certificatescreateorupdate
 certificatesdelete
 certificatethumbprint
@@ -495,9 +496,14 @@ codemirror
 codepackage
 codespace
 codespaces
+codesign
+codesigning
+codesigningaccounts
+Code
 coffeelake
 cognitiveservices
 collectiondetails
+cogservice
 colls
 colocation
 cololocation
@@ -518,6 +524,7 @@ connectionstrings
 conntrack
 consistencygroup
 consumergroups
+containerd
 containerid
 containerinstance
 containerlogs
@@ -561,6 +568,7 @@ createorupdate
 createpreview
 credativ
 creds
+criterias
 crossdomain
 cscf
 cscfg
@@ -583,6 +591,7 @@ customimagesearch
 customizability
 customizer
 custommpi
+customermanagedkeys
 customprebuiltdomains
 customprebuiltentities
 customprebuiltintents
@@ -600,6 +609,7 @@ cyclicity
 cyrl
 dacl
 daemonset
+daemonsets
 dailyforecast
 dailyhistorical
 dall-e
@@ -852,6 +862,7 @@ español
 esrp
 esrps
 estaba
+esxi
 etag
 etags
 etcd
@@ -964,6 +975,7 @@ francecentral
 francesouth
 freebsd
 freeflow
+freemium
 frontdoor
 frulian
 fsaction
@@ -1178,6 +1190,7 @@ illumos
 iloveyou
 imageanalysis
 imagebuilder
+imagecomposition
 imagelist
 imagelists
 imagesearch
@@ -1190,6 +1203,7 @@ importdevices
 imsi
 inari
 inbuild
+inclusivity
 incomingrelationships
 incrementalcopy
 indic
@@ -1386,6 +1400,7 @@ legalhold
 lfot
 lhcp
 libgit
+libgit2
 libtrust
 lifecycle
 lifecycles
@@ -1567,6 +1582,7 @@ metricsadvisor
 metricsdynamicthreshold
 metricstaticthreshold
 metrictype
+mgid
 mgmt
 mhsm
 mhsmip
@@ -1960,6 +1976,8 @@ piqd
 pitr
 pixelated
 pkcs
+planogram
+planogramcompliance
 pkis
 playready
 plex
@@ -2039,10 +2057,12 @@ privatelinks
 privatelinkscopes
 privatelinkservice
 privatepreview
+productrecognition
 projecthilo
 propagations
 propogation
 protectable
+protobuf
 providerhub
 providerport
 provisioner
@@ -2254,6 +2274,7 @@ rollouts
 rolloverdetails
 rollupby
 rootfs
+rootcert
 rosettanetprocessconfigurations
 rotatediskencryptionkey
 rotationpolicy
@@ -2496,6 +2517,7 @@ speechservicesmanagement
 speechtotext
 splitallcsvs
 spreadsheetml
+springboot
 sqlag
 sqldatabase
 sqldb
@@ -2862,6 +2884,7 @@ usagescenarios
 useast
 useraccount
 userargs
+userassignedidentities
 userdata
 userdelegationkey
 usererror
@@ -2988,6 +3011,7 @@ wandisco
 wans
 wargs
 wasb
+wasbs
 wasm
 wasserstein
 watchlist
@@ -3677,6 +3701,7 @@ onetoone
 onetomany
 manytoone
 manytomany
+ssml
 stransparent
 forceencryption
 tlsciphers
@@ -3684,3 +3709,7 @@ tlsprotocols
 windowsserver
 centos
 ulimits
+vnetblock
+usedCPUMHz
+totalCPUMHz
+docon
