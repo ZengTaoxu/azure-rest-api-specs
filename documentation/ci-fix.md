@@ -1,6 +1,6 @@
 # CI Fix Guide
 
-Short link: https://aka.ms/ci-fix
+Short link: https://aka.ms/azsdk/ci-fix
 
 This page provides detailed instructions on how to diagnose, reproduce, fix and get help on various [automated validation tooling] failures on your [Azure REST API specs PR].
 
@@ -30,18 +30,8 @@ cd specification/contosowidgetmanager
 # Install the dependencies to the local 'node_modules' folder.
 npm install
 
-# Compile TypeScript. Compilation will fail, this is expected. But it will compile 'scripts/prettier-swagger-plugin', which is what we need.
-npx tsc 
-
-# As of 5/25/2023, the prettier version should be 2.1.2
-npx prettier --version
-
 # Run 'prettier --check' to verify the problems can be reproduced locally
 npx prettier --check **/*.json
-
-# Run 'prettier --list-different' to understand which files have problems.
-# Note: there is no way to view the exact problems without actually changing the affected files. See https://github.com/prettier/prettier/issues/6069.
-npx prettier --list-different **/*.json
 
 # Run 'prettier --write' to fix the problems.
 npx prettier --write **/*.json
@@ -109,7 +99,11 @@ To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally re
 
 ## Avocado
 
-Run avocado locally:
+### Get help fixing Avocado validation failures
+
+Refer to [Avocado README](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
+
+### Run avocado locally
 
 ```
 npm install -g @azure/avocado
@@ -124,8 +118,6 @@ Note: When running in Swagger PR pipeline, Avocado only report errors with file 
 - Run all specs: Clone the repo `azure/azure-rest-api-specs` and run "avocado" in folder `azure/azure-rest-api-specs`.
 - Run single service specs: create a folder `specification`. and move your service specs folder in `specification`. run "avocado"
 
-Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
-
 ## API Doc Preview
 
 If you see `Swagger ApiDocPreview ` check fail with a failure [like this one](https://github.com/Azure/azure-rest-api-specs/pull/24841/checks?check_run_id=15056283615):
@@ -138,20 +130,21 @@ Then refer to [this TSG](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/in
 
 ## TypeSpec Validation
 
-This validator is to ensure the TypeSpec & swagger files in PR are consistent and passing validation.
+This validator will help ensure your TypeSpec project follows [standard conventions](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md) as well ensures that the [generated swagger](https://azure.github.io/typespec-azure/docs/emitters/typespec-autorest) files are in-sync with your project.
 
-### How to fix
+### Run tsv locally
+```
+cd <repo>
+git checkout <your-branch>
+git merge <target-branch>
+npm ci
+npx tsv <path-to-your-spec>
+git commit; git push (if any changes)
 
-| Error Code                   | Severity | Solution                                                                                                                                                                                                                                                                                     |
-|------------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| MissingTypeSpecFile          | Error    | Adding the related TypeSpec project into {RP-Name} folder, like [Qumulo.Management](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/liftrqumulo/Qumulo.Management)                                                                                                     |
-| MissingExamplesDirectory     | Error    | The example files should be kept in the 'examples' folder under the TypeSpec project,the typespec-autorest emitter will copy them into the output folder and create corresponding 'x-ms-examples' in the swagger automatically when geneates the swagger, you should also check in it in PR. |
-| InConsistentSwagger          | Error    | The generated swagger is inconsistent with the swagger in PR, so you need to re-generate swagger from TypeSpec project and check in it.                                                                                                                                                      |
-| SwaggerNotExistInPR          | Error    | It occurs when there is a TypeSpec file in the PR but the generated swagger is not present in the PR, so you need to add the swagger to the PR.                                                                                                                                              |
-| GeneratedSwaggerNotFound     | Error    | It occurs when there is a TypeSpec file in the PR but there is no swagger produced by the typespec-autorest emitter, so you need to check the tspconfig.yaml to see if it has the wrong configuration, like 'output-dir' or 'azure-resource-provider-folder'.                                |
-| MissingTypeSpecProjectConfig | Warning  | The configuration of '@azure-tools/typespec-autorest' including 'output-file','azure-resource-provider-folder' are used to customize the generated swagger file name and folder structure, it's recommended to use them in the 'tspconfig.yaml', here is a [sample tspconfig.yaml].          |
-
-See [typespec-autorest](https://azure.github.io/typespec-azure/docs/emitters/typespec-autorest) for more information about how the swagger is generated from the TypeSpec project.
+# example 
+npx tsv specification/contosowidgetmanager/Contoso.WidgetManager
+```
+Then check any errors that might be outputted and address any issues as needed. If there are changed files after the run it generally means that the generated swagger files were not in-sync with the TypeSpec project and you should include those changes in your pull request as well. 
 
 ## Suppression Process
 
@@ -167,4 +160,3 @@ Following tools have been removed from the validation toolchain as of August 202
 
 [automated validation tooling]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs/api-tooling
 [Azure REST API specs PR]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-specs-pr
-[sample tspconfig.yaml]: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml#L11
