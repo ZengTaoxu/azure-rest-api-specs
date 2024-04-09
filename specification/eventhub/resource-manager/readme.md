@@ -26,7 +26,7 @@ These are the global settings for the EventHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-01-preview
+tag: package-2024-01
 ```
 
 ### Tag: package-2017-04
@@ -206,6 +206,27 @@ input-file:
 - Microsoft.EventHub/preview/2023-01-01-preview/ApplicationGroups.json
 ```
 
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-01'
+input-file:
+- Microsoft.EventHub/stable/2024-01-01/AvailableClusterRegions.json
+- Microsoft.EventHub/stable/2024-01-01/Clusters.json
+- Microsoft.EventHub/stable/2024-01-01/namespaces.json
+- Microsoft.EventHub/stable/2024-01-01/quotaConfiguration.json
+- Microsoft.EventHub/stable/2024-01-01/networkrulessets.json
+- Microsoft.EventHub/stable/2024-01-01/AuthorizationRules.json
+- Microsoft.EventHub/stable/2024-01-01/CheckNameAvailability.json
+- Microsoft.EventHub/stable/2024-01-01/consumergroups.json
+- Microsoft.EventHub/stable/2024-01-01/disasterRecoveryConfigs.json
+- Microsoft.EventHub/stable/2024-01-01/operations.json
+- Microsoft.EventHub/stable/2024-01-01/eventhubs.json
+- Microsoft.EventHub/stable/2024-01-01/SchemaRegistry.json
+- Microsoft.EventHub/stable/2024-01-01/ApplicationGroups.json
+```
+
 ## Suppression
 
 ``` yaml
@@ -248,7 +269,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
